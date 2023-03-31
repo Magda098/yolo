@@ -2,13 +2,16 @@ FROM node:17.8.0
 
 LABEL Maintainer Magda
 
-WORKDIR /usr/src/backend
+RUN mkdir /app
 
-COPY package*.json ./
+WORKDIR /app
+
+COPY package.json /app/
+COPY package-lock.json /app/
 
 RUN npm install
 
-COPY . .
+COPY . /app/
 
 EXPOSE 3000
 
