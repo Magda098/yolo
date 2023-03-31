@@ -27,4 +27,25 @@ services:
     networks:
       - yolo
 
-  
+  backend:
+    container_name: yolo_backend
+    restart: always
+    build: 
+      context : backend/
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongo_db
+    environment:
+      PORT: 4000
+      DATABASE_URL: 'mongodb://app1:app1@mongo:27017/'
+    networks:
+      - yolo
+
+networks:
+  yolo:
+    driver: bridge
+
+volumes:
+  mongo_db: {}
