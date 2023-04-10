@@ -1,22 +1,30 @@
-FROM node:14-alpine
+FROM node:14-alpine as builder 
 
-LABEL Maintainer Magda
+LABEL Maintainer Magda 
 
-RUN mkdir /app
+RUN mkdir /app 
 
-WORKDIR /app
+WORKDIR /app 
 
-COPY package.json /app/
-COPY package-lock.json /app/
+ENV NODE_ENV=production 
 
-RUN npm install
+COPY package.json /app/ 
+COPY package-lock.json /app/ 
 
-COPY . /app/
+RUN npm install 
 
-RUN npm run build
+COPY . /app/ 
 
-RUN npm install -g serve
+RUN npm run build 
 
-EXPOSE 3000
+RUN npm install -g serve 
 
-CMD [ "serve", "-s", "build", "-l", "3000" ]
+FROM gcr.io/distroless/nodejs18-debian11 
+
+COPY --from=builder /app /app 
+
+WORKDIR /app 
+
+EXPOSE 4000
+
+CMD [ "serve", "-s", "build", "-l", "4000" ]
