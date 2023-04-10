@@ -1,4 +1,4 @@
-FROM node:17.8.0
+FROM node:alpine
 
 LABEL Maintainer Magda
 
