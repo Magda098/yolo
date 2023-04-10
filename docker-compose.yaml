@@ -4,7 +4,7 @@ services:
   #MongoDB services
   mongo_db:
     container_name: db_container
-    image: mongo:latest
+    image: mvertes/alpine-mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: app1
       MONGO_INITDB_ROOT_PASSWORD: app1
@@ -12,7 +12,7 @@ services:
     ports:
       - 27017:27017
     volumes: 
-      - mongo_db:/data/db
+      - mongo_db:/data/db \mvertes/alpine-mongo
     networks:
       - yolo
   
@@ -23,7 +23,7 @@ services:
       context : client/
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 4000:4000
     networks:
       - yolo
 
@@ -34,12 +34,10 @@ services:
       context : backend/
       dockerfile: Dockerfile
     ports:
-      - 4000:4000
+      - 3000:3000
     depends_on:
       - mongo_db
-    environment:
-      PORT: 4000
-      DATABASE_URL: 'mongodb://app1:app1@mongo:27017/'
+    
     networks:
       - yolo
 
