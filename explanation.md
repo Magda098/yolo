@@ -32,7 +32,7 @@ This file (docker-compose.yaml) creates three containers
 
 yolo_client - contains the yolo client service which runs on port 3000 ,re-tagged to yolo-client:v1.0 
 
-yolo_backend - contains yolo backend service which runs on port 4000,retagged to yolo-client:v1.0
+yolo_backend - contains yolo backend service which runs on port 4000,retagged to yolo-backend:v1.0
 
 mongo_db - contains mvertes/alpine-mongo db which runs on port 27017 and has an attached volume called /data/db \mvertes/alpine-mongo
 
