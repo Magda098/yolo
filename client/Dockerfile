@@ -19,12 +19,6 @@ RUN npm run build
 
 RUN npm install -g serve 
 
-FROM gcr.io/distroless/nodejs18-debian11 
-
-COPY --from=builder /app /app 
-
-WORKDIR /app 
-
 EXPOSE 4000
 
 CMD [ "serve", "-s", "build", "-l", "4000" ]
